@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -150,6 +151,18 @@ main()
     size_t bin_count;
     cerr << "Enter column count: ";
     cin >> bin_count;
+
+    if (bin_count == 0)
+    {
+        bin_count = sqrt(number_count);
+        cout << "Kolichestvo korzin bylo polucheno po formyle bin_count = sqrt(number_count) \n";
+    }
+
+    if (bin_count > 25)
+    {
+        bin_count = 1 + log2(number_count);
+        cout << "Kolichestvo korzin bylo polucheni po pravilu Styordzhesa: \n";
+    }
     // Обработка данных
 
     const auto bins = make_histogram(numbers, bin_count);
