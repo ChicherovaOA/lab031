@@ -115,7 +115,6 @@ svg_end()
     cout << "</svg>\n";
 }
 
-
 void show_histogram_svg(const vector <size_t> bins)
 {
     const auto IMAGE_WIDTH = 400;
