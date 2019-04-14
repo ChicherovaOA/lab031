@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include "histogram.h"
 
 using namespace std;
 
@@ -14,30 +15,11 @@ input_numbers(size_t count)
     }
     return result;
 }
-
-void find_minmax(vector<double> numbers, double& min, double& max)
+void make_histogram(vector<size_t>& bins, vector <double> numbers, size_t &bin_count)
 {
-    for (double number : numbers)
-    {
-        if (number < min)
-        {
-            min = number;
-        }
-        if (number > max)
-        {
-            max = number;
-        }
-    }
-    // funkcija poisk max i min elemenov
-}
-
-vector <size_t> make_histogram(const vector<double>& numbers, size_t& bin_count)
-{
-    double min = numbers[0];
-    double max = numbers[0];
+    double min, max;
     find_minmax(numbers, min, max);
 
-    vector<size_t> bins(bin_count);
     for (double number : numbers)
     {
         size_t bin = (size_t)((number - min) / (max - min) * bin_count);
@@ -47,7 +29,6 @@ vector <size_t> make_histogram(const vector<double>& numbers, size_t& bin_count)
         }
         bins[bin]++;
     }
-    return bins;
 }
 void show_histogram_text(vector<size_t> bins)
 {
@@ -151,7 +132,7 @@ main()
     size_t bin_count;
     cerr << "Enter column count: ";
     cin >> bin_count;
-
+{
     if (bin_count == 0)
     {
         bin_count = sqrt(number_count);
@@ -163,9 +144,12 @@ main()
         bin_count = 1 + log2(number_count);
         cout << "Kolichestvo korzin bylo polucheni po pravilu Styordzhesa: \n";
     }
+}
     // Обработка данных
 
-    const auto bins = make_histogram(numbers, bin_count);
+    vector <size_t> bins (bin_count);
+    make_histogram(bins, numbers, bin_count);
+
 
     // Вывод данных
     //show_histogram_text(bins);
